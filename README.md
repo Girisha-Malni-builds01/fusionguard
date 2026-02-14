@@ -56,9 +56,9 @@ FusionGuard evaluates four execution variants:
 ---
 
 FusionGuard measures average per-iteration latency:
-
+```
 t = (T_end - T_start) / N
-
+```
 Procedure:
 
 1. Warm-up runs (10 iterations)
@@ -110,47 +110,46 @@ FusionGuard supports:
 If a quantization backend is unavailable, FP32 variants remain functional.
 
 ## Reproducibility
-Reproducibility is ensured via:
-Deterministic iteration counts
-Explicit CUDA synchronization
-Fixed input tensor shapes
-No stochastic graph rewriting
+* Reproducibility is ensured via:
+* Deterministic iteration counts
+* Explicit CUDA synchronization
+* Fixed input tensor shapes
+* No stochastic graph rewriting
 
 ## Limitations
 
-Dynamic INT8 primarily benefits CPU inference.
-CUDA INT8 dynamic quantization is limited.
-Fusion is implemented at the PyTorch module level (not kernel-level fusion).
-No persistent caching across sessions.
-Limited to Transformer MLP blocks (no attention yet).
+*Dynamic INT8 primarily benefits CPU inference.
+*CUDA INT8 dynamic quantization is limited.
+*Fusion is implemented at the PyTorch module level (not kernel-level fusion).
+*No persistent caching across sessions.
+*Limited to Transformer MLP blocks (no attention yet).
 
 ## Performance Interpretation
 
 Fusion is beneficial when:
 
-Kernel launch overhead dominates
-Intermediate activation writes are costly
-Memory traffic is a bottleneck
+* Kernel launch overhead dominates
+* Intermediate activation writes are costly
+* Memory traffic is a bottleneck
 
 Quantization is beneficial when:
 
-Compute-bound regime dominates
-INT8 backend is optimized
-Memory bandwidth is constrained
+* Compute-bound regime dominates
+* INT8 backend is optimized
+* Memory bandwidth is constrained
 
 These behaviors align with the Roofline performance model framework.
-
 
 
 # Citation
 
 If you use FusionGuard in research, please cite:
-
+```
 @software{fusionguard2026,
   title = {FusionGuard: Runtime Adaptive Fusion and INT8 Selection for Transformer Inference},
   author = {Your Name},
   year = {2026},
   url = {https://github.com/YOUR_USERNAME/fusionguard}
 }
-
+```
 
