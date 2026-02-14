@@ -56,7 +56,7 @@ FusionGuard evaluates four execution variants:
 ---
 
 FusionGuard measures average per-iteration latency:
-```
+
 
 $$
 t = \frac{T_{\text{end}} - T_{\text{start}}}{N}
@@ -67,7 +67,7 @@ where:
 - $T_{\text{start}}$ denotes the timestamp immediately before timed execution,
 - $T_{\text{end}}$ denotes the timestamp immediately after timed execution,
 - $N$ denotes the number of benchmark iterations.
-```
+
 Procedure:
 
 1. Warm-up runs (10 iterations)
