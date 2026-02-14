@@ -156,9 +156,9 @@ If you use FusionGuard in research, please cite:
 ```
 @software{fusionguard2026,
   title = {FusionGuard: Runtime Adaptive Fusion and INT8 Selection for Transformer Inference},
-  author = {Your Name},
+  author = {Girisha Malni N, Syed Ameen G},
   year = {2026},
-  url = {https://github.com/YOUR_USERNAME/fusionguard}
+  url = {https://github.com/Girisha-Malni-builds01/fusionguard}
 }
 ```
 
