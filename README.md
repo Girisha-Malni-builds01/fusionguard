@@ -57,7 +57,16 @@ FusionGuard evaluates four execution variants:
 
 FusionGuard measures average per-iteration latency:
 ```
-t = (T_end - T_start) / N
+
+$$
+t = \frac{T_{\text{end}} - T_{\text{start}}}{N}
+$$
+
+where:
+
+- $T_{\text{start}}$ denotes the timestamp immediately before timed execution,
+- $T_{\text{end}}$ denotes the timestamp immediately after timed execution,
+- $N$ denotes the number of benchmark iterations.
 ```
 Procedure:
 
@@ -118,11 +127,11 @@ If a quantization backend is unavailable, FP32 variants remain functional.
 
 ## Limitations
 
-*Dynamic INT8 primarily benefits CPU inference.
-*CUDA INT8 dynamic quantization is limited.
-*Fusion is implemented at the PyTorch module level (not kernel-level fusion).
-*No persistent caching across sessions.
-*Limited to Transformer MLP blocks (no attention yet).
+* Dynamic INT8 primarily benefits CPU inference.
+* CUDA INT8 dynamic quantization is limited.
+* Fusion is implemented at the PyTorch module level (not kernel-level fusion).
+* No persistent caching across sessions.
+* Limited to Transformer MLP blocks (no attention yet).
 
 ## Performance Interpretation
 
