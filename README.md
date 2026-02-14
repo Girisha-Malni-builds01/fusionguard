@@ -8,11 +8,7 @@
 FusionGuard is a lightweight research-oriented Python library for **runtime-adaptive fusion and INT8 selection in Transformer MLP inference**.  
 It dynamically benchmarks multiple execution strategies and selects the fastest configuration for the current hardware environment.
 
----
-
-# Abstract
-
-Modern inference runtimes rely heavily on static heuristics to decide whether operator fusion or quantization should be applied. However, fusion profitability and quantization performance depend on hardware architecture, memory bandwidth, batch size, and model dimensionality. FusionGuard introduces a minimal runtime benchmarking engine that empirically selects the optimal execution strategy for Transformer MLP blocks. The system evaluates fused vs unfused and FP32 vs dynamic INT8 variants and automatically deploys the fastest configuration.
+Modern inference runtimes rely heavily on static heuristics to decide whether operator fusion or quantization should be applied. However, fusion profitability and quantization performance depend on hardware architecture, memory bandwidth, batch size and model dimensionality. FusionGuard introduces a minimal runtime benchmarking engine that empirically selects the optimal execution strategy for Transformer MLP blocks. The system evaluates fused vs unfused and FP32 vs dynamic INT8 variants and automatically deploys the fastest configuration.
 
 ---
 
@@ -91,100 +87,62 @@ source venv/bin/activate
 
 pip install torch
 pip install -e .
+```
 
 # Programmatic Use
-
+```
 from fusionguard import FusionGuard
 import torch
 
 guard = FusionGuard(dim=768, hidden_dim=3072)
 x = torch.randn(16, 768)
 y = guard(x)
-
-
+```
 After initialization, guard(x) automatically uses the optimal execution path.
 
-Hardware Adaptation
+## Hardware Adaptation
 
 FusionGuard supports:
-
-CPU-only environments
-
-CUDA-enabled systems
-
-ARM and x86 architectures
-
-Automatic quantization backend selection
-
+* CPU-only environments
+* CUDA-enabled systems
+* ARM and x86 architectures
+* Automatic quantization backend selection
 If a quantization backend is unavailable, FP32 variants remain functional.
 
-Reproducibility
-
+## Reproducibility
 Reproducibility is ensured via:
-
 Deterministic iteration counts
-
 Explicit CUDA synchronization
-
 Fixed input tensor shapes
-
 No stochastic graph rewriting
 
-Absolute latency values depend on:
-
-Hardware architecture
-
-CPU frequency scaling
-
-GPU clock state
-
-PyTorch build version
-
-Limitations
+## Limitations
 
 Dynamic INT8 primarily benefits CPU inference.
-
 CUDA INT8 dynamic quantization is limited.
-
 Fusion is implemented at the PyTorch module level (not kernel-level fusion).
-
 No persistent caching across sessions.
-
 Limited to Transformer MLP blocks (no attention yet).
 
-Performance Interpretation
+## Performance Interpretation
 
 Fusion is beneficial when:
 
 Kernel launch overhead dominates
-
 Intermediate activation writes are costly
-
 Memory traffic is a bottleneck
 
 Quantization is beneficial when:
 
 Compute-bound regime dominates
-
 INT8 backend is optimized
-
 Memory bandwidth is constrained
 
 These behaviors align with the Roofline performance model framework.
 
-Related Work
 
-Williams et al., Roofline: An Insightful Visual Performance Model for Multicore Architectures, CACM, 2009.
 
-NVIDIA TensorRT Developer Guide.
-
-PyTorch Quantization Documentation.
-
-Intel oneDNN Performance Guide.
-
-FusionGuard complements static cost models by introducing runtime empirical selection.
-
-Citation
+# Citation
 
 If you use FusionGuard in research, please cite:
 
