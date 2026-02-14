@@ -1,0 +1,11 @@
+[project]
+name = "fusionguard"
+version = "0.1.0"
+description = "Runtime adaptive fusion and INT8 selection for Transformer MLP blocks"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = ["torch"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
